@@ -1,0 +1,34 @@
+!pip install japanize-matplotlib
+import japanize_matplotlib
+import os
+import re
+from datetime import datetime as dt
+import pandas as pd
+from pandas import DataFrame
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+
+from google.colab import drive
+drive.mount('/content/drive')
+
+os.chdir('/content/drive/My Drive/Colab Notebooks')
+
+df = pd.read_csv('生徒のスコアデータ.csv',header= None)
+# https://www.kaggle.com/datasets/desalegngeb/students-exam-scores からダウンロードしたデータの名前を変更した
+
+df
+#データセットを表示
+
+df = df.drop([0], axis=1)
+#IDカラムを削除→このデータセットではインデックスで指定
+
+df = df.rename(columns = {1: '性別',2: '民族',3:'両親の学歴',4:'ランチの種類',5:'テスト対策コースへの取り組み',6:'親の婚姻状況',7:'スポーツへの取り組み',8:'最初の子供か',8:'兄弟の人数',10:'通学手段',11:'週当たりの勉強時間',12:'数学のテストの点数',13:'リーディングテストの点数',14:'ライティングテストの点数' })
+#カラム名を日本語に変更
+
+df = df.drop(index=0)
+#0行目の削除
+
+df.info()
+#欠損データの確認
